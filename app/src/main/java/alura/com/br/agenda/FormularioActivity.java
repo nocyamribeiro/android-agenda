@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import alura.com.br.agenda.dao.AlunoDAO;
 import alura.com.br.agenda.modelo.Aluno;
 
@@ -21,8 +23,15 @@ public class FormularioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-
         helper = new FormularioHelper(this);
+
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+
+        if(aluno != null) {
+            helper.preencheFormulario(aluno);
+        }
+
         Button botaoSalvar = (Button) findViewById(R.id.formulario_salvar);
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,14 +56,24 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                Aluno aluno = helper.pegaAluno();
-                Toast.makeText(FormularioActivity.this, "Aluno " + aluno.getNome() +" Salvo!", Toast.LENGTH_SHORT).show();
-                AlunoDAO alunoDAO = new AlunoDAO(this);
-                alunoDAO.insere(aluno);
-                alunoDAO.close();
+                salvarAluno();
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void salvarAluno() {
+        Aluno aluno = helper.pegaAluno();
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+
+        if(aluno.getId() != null) {
+            alunoDAO.altera(aluno);
+        } else {
+            alunoDAO.insere(aluno);
+        }
+        alunoDAO.close();
+
+        Toast.makeText(FormularioActivity.this, "Aluno " + aluno.getNome() +" Salvo!", Toast.LENGTH_SHORT).show();
     }
 }
