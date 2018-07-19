@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.List;
 
+import alura.com.br.agenda.adapter.AlunoAdapter;
 import alura.com.br.agenda.dao.AlunoDAO;
 import alura.com.br.agenda.modelo.Aluno;
 
@@ -62,7 +63,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         List<Aluno> alunos = alunoDAO.buscaAlunos();
         alunoDAO.close();
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        AlunoAdapter adapter = new AlunoAdapter( this, alunos);
         listaAlunos.setAdapter(adapter);
     }
 
@@ -93,12 +94,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
         itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                Intent intentLigar = new Intent(Intent.ACTION_CALL);
                 if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE}, 123);
                 } else {
-                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
                     intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
                     startActivity(intentLigar);
                 }
