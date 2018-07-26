@@ -67,12 +67,15 @@ public class AlunoAdapter extends BaseAdapter{
         campoTelefone.setText(aluno.getTelefone());
 
         ImageView campoFoto = (ImageView) view.findViewById(R.id.item_foto);
+
         String caminhoFoto = aluno.getCaminhoFoto();
-        Bitmap bm = BitmapFactory.decodeFile(caminhoFoto);
-        bm = Bitmap.createScaledBitmap(bm, 100, 100, true);
-        campoFoto.setImageBitmap(bm);
-        campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
-        campoFoto.setTag(caminhoFoto);
+        if(caminhoFoto != null) {
+            Bitmap bm = BitmapFactory.decodeFile(caminhoFoto);
+            bm = Bitmap.createScaledBitmap(bm, 100, 100, true);
+            campoFoto.setImageBitmap(bm);
+            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
+            campoFoto.setTag(caminhoFoto);
+        }
 
         return view;
     }
