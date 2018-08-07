@@ -1,0 +1,16 @@
+{
+  "list" :[
+    {
+      "aluno" : [
+        {
+          "id": "1",
+          "nome": "Daniel",
+          "endereco" : "Rua Vergueiro",
+          "telefone": "111212554",
+          "site": "www.alura.com.br",
+          "nota": "4,5"
+        }
+      ]
+    }
+  ]
+}
