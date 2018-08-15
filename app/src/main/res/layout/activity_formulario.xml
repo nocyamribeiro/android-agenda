@@ -33,19 +33,19 @@
 
 
 
-        <EditText android:hint="Nome"
+        <EditText android:hint="@string/campo_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/formulario_nome"/>
 
-        <EditText android:hint="Endereço"
+        <EditText android:hint="@string/campo_endereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/formulario_endereco"/>
 
-        <EditText android:hint="Telefone"
+        <EditText android:hint="@string/campo_telefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/formulario_telefone"/>
 
-        <EditText android:hint="Site"
+        <EditText android:hint="@string/campo_site"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/formulario_site"/>
 
