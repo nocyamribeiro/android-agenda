@@ -43,9 +43,9 @@ public class ListaProvasFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
-                Intent vaiParaDetalhes = new Intent(getContext(), DetalhesProvaActivity.class);
-                vaiParaDetalhes.putExtra("prova", prova);
-                startActivity(vaiParaDetalhes);
+
+                ProvasActivity provasActivity = (ProvasActivity) getActivity();
+                provasActivity.selecionaProva(prova);
             }
         });
         return view;
