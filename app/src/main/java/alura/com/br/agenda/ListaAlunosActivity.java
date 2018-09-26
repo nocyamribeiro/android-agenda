@@ -28,6 +28,7 @@ import alura.com.br.agenda.modelo.Aluno;
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private static final int CODIGO_SMS = 1234;
+    private static final int CODIGO_FINE_LOCATION = 5555;
     private ListView listaAlunos;
 
     @Override
@@ -39,6 +40,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
             if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
                 requestPermissions(new String[] { Manifest.permission.RECEIVE_SMS } , CODIGO_SMS);
             }
+
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION } , CODIGO_FINE_LOCATION);
+            }
+
+
         }
 
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
